@@ -3,3 +3,14 @@
 
 # Example code in package build process
 *-Ex.R
+# History files
+.Rhistory
+.RData
+.*
+*.swp
+*.swo
+
+# Example code in package build process
+*-Ex.R
+
+restricted
