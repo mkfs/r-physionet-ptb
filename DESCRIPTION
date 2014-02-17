@@ -1,0 +1,9 @@
+Package: r.physionet.ptb
+Type: Package
+Title: Physionet PTB database data analysis
+Version: 1.0
+Date: 2014-02-10
+Author: mkfs <mkfs@github.com>
+Maintainer: mkfs <mkfs@github.com>
+Description: Functions and scripts for working with Physionet PTB database data.
+License: BSD
