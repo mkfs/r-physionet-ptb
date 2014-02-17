@@ -1,5 +1,7 @@
 \name{ptb.patient}
 \alias{ptb.patient}
+\alias{ptb.test}
+\alias{ptb.random.test.id}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Extract patient data from a PTB list.
@@ -8,6 +10,8 @@ Extract patient data from a PTB list.
 Extract 'num' random patients from PTB list.}
 \usage{
 ptb.patient(ptb, num = 100)
+ptb.test(ptb, num = 100)
+ptb.random.test.id(ptb, num = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

@@ -3,12 +3,12 @@
 \alias{r-physionet-ptb}
 \docType{package}
 \title{
-What the package does (short line)
-~~ package title ~~
+Physionet PTB Database Utilities
 }
 \description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
+A collection of R functions and command-line utilities for working with data in the PTB database at Pysionet (http://www.physionet.org).
+
+Command-line utilities are provided for downloading the data files from the Physionet website and converting them to JSON. The R package provides functions for analyzing the JSON files.
 }
 \details{
 \tabular{ll}{
@@ -16,26 +16,40 @@ Package: \tab r-physionet-ptb\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
 Date: \tab 2014-02-10\cr
-License: \tab What license is it under?\cr
+License: \tab BSD\cr
 }
-~~ An overview of how to use the package, including the most important functions ~~
+This package is used to perform basic transforms (e.g. frequency, wavelet) on the Physionet PTB ECG data. Rudimentary analyses are included, such as generating basic feature vectors or plot the correlation of transformed data among patients.
 }
 \author{
-Who wrote it
-
-Maintainer: Who to complain to <yourfault@somewhere.net>
-~~ The author and/or maintainer of the package ~~
+mkfs (http://www.github.com/mkfs/r-physionet-ptb)
 }
 \references{
-~~ Literature or other references for background information ~~
+TODO: Physionet biblink
+Github Project page: http://www.github.com/mkfs/r-physionet-ptb
 }
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in the R ~~
-~~ documentation directory ~~
 \keyword{ package }
-\seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
-}
 \examples{
-~~ simple examples of the most important functions ~~
+Command-line utilities:
+\dontrun{
+  # Download the PTB database into ./ptbdb
+  download_ptb.sh
+  # Convert patients 100-199 to JSON
+  ptb_patient_to_json.rb ptbdb/patient1?? > ptb.data.json
+}
+The JSON files can get very large when used for many tests. It is recommended that the PTB files be converted a few at a time, loaded into R, and saved in a .Rdata object.
+\dontrun{
+  library(r-physionet-ptb)
+  ptb <- ptb.from.file('/tmp//ptb.data.json')
+
+  # Perform all built-in transforms of the ECG data
+  ptb.data <- ptb.transform(ptb)
+  save(list=c('ptb', 'ptb.data'), file='ptb.RData')
+}
+
+\dontrun{
+  # Extract the lead pair V1 and V6 into a Complex dataframe column
+  df.ecg <- ptb.extract.lead.pair(ptb, 'v1', 'v6')
+  # Plot a frequency transform of the lead pair
+  vec.cps <- ptb.power.spectrum(df.ecg[,1])$cross.power.spectrum
+  plot(Re(vec.cps), type='l')
 }

@@ -1,5 +1,7 @@
 \name{ptb.list.patients}
 \alias{ptb.list.patients}
+\alias{ptb.list.leads}
+\alias{ptb.list.tests}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~

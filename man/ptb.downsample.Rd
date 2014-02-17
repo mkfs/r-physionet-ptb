@@ -1,68 +1,32 @@
 \name{ptb.downsample}
 \alias{ptb.downsample}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+Downsample a vector to the specified sampling rate.
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Returns a numeric vector which has been downsampled to the specified rate via decimation.
 }
 \usage{
 ptb.downsample(vec, rate, ptb.base.rate = 1000)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{vec}{
-%%     ~~Describe \code{vec} here~~
+  The vector of ECG data to downsample.
 }
   \item{rate}{
-%%     ~~Describe \code{rate} here~~
+  The rate to downsample to.
 }
   \item{ptb.base.rate}{
-%%     ~~Describe \code{ptb.base.rate} here~~
+  The rate at which vec was sampled, in Hz. For the PTB database, this is 1000.
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
+A numeric vector containing the downsampled data. This will be shorter than the original vector.
 }
 \author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+mkfs (http://www.github.com/mkfs)
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (vec, rate, ptb.base.rate = 1000) 
-{
-    if (rate < ptb.base.rate) {
-        rate.delta <- floor(ptb.base.rate/rate)
-        return(vec[seq(1, length(vec), rate.delta)])
-    }
-    return(vec)
-  }
+  ptb.downsample( runif(5000, min=0, max=1500), 100 )
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

@@ -141,19 +141,26 @@ ptb.extract.lead <- function(ptb, name, recycle=TRUE, use.patient.id=TRUE) {
 }
 
 # lead-pair (as complex) : df with column name PAT_ID-TEST_ID
-ptb.extract.lead.pair <- function(ptb, lead.a, lead.b) {
+ptb.extract.lead.pair <- function(ptb, lead.a, lead.b, recycle=TRUE, use.patient.id=TRUE) {
   list.a <- lapply(ptb$leads, function(x) x[,lead.a])
   list.b <- lapply(ptb$leads, function(x) x[,lead.b])
-  min.len <- min(sapply(list.a, length), sapply(list.b, length))
-  list.a <- lapply(list.a, function(x) x[0:min.len])
-  list.b <- lapply(list.b, function(x) x[0:min.len])
+  
+  if (! recycle) {
+    min.len <- min(sapply(list.a, length), sapply(list.b, length))
+    list.a <- lapply(list.a, function(x) x[0:min.len])
+    list.b <- lapply(list.b, function(x) x[0:min.len])
+  }
                  
   list.complex <- lapply( names(list.a),
                   function(x) complex(real=list.a[[x]], 
                                       imaginary=list.b[[x]]) )
   
   df <- as.data.frame(list.complex)
-  names(df) <- ptb.generate.pat.test.names(ptb, as.integer(names(list.a)))  
+  if ( use.patient.id ) {
+    names(df) <- ptb.generate.pat.test.names(ptb, as.integer(names(lst)))
+  } else {
+    names(df) <- names(lst)
+  }
   return(df)
 }
 

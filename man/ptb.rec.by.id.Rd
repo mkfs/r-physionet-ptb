@@ -1,6 +1,7 @@
 \name{ptb.rec.by.id}
 \alias{ptb.rec.by.id}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\alias{ptb.ecg.by.id}
+\alias{ptb.test.by.id}
 \title{
 %%  ~~function to do ... ~~
 }
@@ -9,6 +10,8 @@
 }
 \usage{
 ptb.rec.by.id(ptb, id)
+ptb.ecg.by.id(ptb, id)
+ptb.test.by.id(ptb, ids)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -20,42 +23,20 @@ ptb.rec.by.id(ptb, id)
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
+ptb.ecg.by.id will return the record (ptb$rec) dataframe for the specified test ID.
+
+ptb.ecg.by.id will return the ECG dataframe for the specified test ID.
+
+ptb.test.by.id will return a PTB list containing all tests specified in ids.
 }
 \author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+mkfs (http://www.github.com/mkfs)
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (ptb, id) 
-{
-    ptb$rec[ptb$rec$ID == id, ]
-  }
+  data("patient.293")
+  rec.df <- ptb.rec.by.id(ptb, '160022')
+  ecg.df <- ptb.ecg.by.id(ptb, '160022')
+  ptb.subset <- ptb.test.by.id(ptb, c("1640024", "1640025"))
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

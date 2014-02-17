@@ -1,24 +1,22 @@
 \name{ptb.from.file}
 \alias{ptb.from.file}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\alias{ptb.from.string}
 \title{
 Load PTB data from JSON into a list object.
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+These functions create a list object from JSON-serialized PTB data as produced by the ptb_patient_to_json.rb utility.
 }
 \usage{
 ptb.from.file(path)
 ptb.from.string(str)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{path}{
-  Psth to a JSON file created by ptb_patient_to_json.rb
+  Path to a JSON file created by ptb_patient_to_json.rb
+  \item{str}{
+  Character vector containing JSON created by ptb_patient_to_json.rb
 }
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
 }
 \value{
 A PTB list object with the following elements:
@@ -26,35 +24,23 @@ A PTB list object with the following elements:
   \item{leads}{List with per-test data frames of ECG lead data}
 }
 \references{
-%% ~put references to the literature/web site here ~
+Github Project page: http://www.github.com/mkfs/r-physionet-ptb
 }
 \author{
-%%  ~~who you are~~
+mkfs (http://www.github.com/mkfs)
 }
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{ptb.list.leads}}
+\code{\link{ptb.list.patients}}
+\code{\link{ptb.list.tests}}
+\code{\link{ptb.patient}}
+\code{\link{ptb.test}}
+\code{\link{ptb.test.by.id}}
+\code{\link{ptb.transform}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (path) 
-{
-    ptb.lst <- fromJSON(file = path)
-    ptb <- ptb.from.list(ptb.lst)
-    rm(ptb.lst)
-    return(ptb)
-  }
+\dontrun{
+  ptb <- ptb.from.file('/tmp/ptb.json')
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}

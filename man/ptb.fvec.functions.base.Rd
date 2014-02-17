@@ -1,5 +1,8 @@
 \name{ptb.fvec.functions.base}
 \alias{ptb.fvec.functions.base}
+\alias{ptb.fvec.functions.dwt}
+\alias{ptb.fvec.functions.peaks}
+\alias{ptb.fvec.functions.peaks.parts}
 \docType{data}
 \title{
 %%   ~~ data name/kind ... ~~

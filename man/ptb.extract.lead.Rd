@@ -1,79 +1,48 @@
 \name{ptb.extract.lead}
 \alias{ptb.extract.lead}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\alias{ptb.extract.lead.pair}
 \title{
-%%  ~~function to do ... ~~
+Extract ECG lead or lead-pair data from a PTB list.
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Returns a data frame of the data for the specified lead or lead pair, from all patients and tests in the PTB list.
 }
 \usage{
 ptb.extract.lead(ptb, name, recycle = TRUE, use.patient.id = TRUE)
+ptb.extract.lead.pair(ptb, lead.a, lead.b, recycle = TRUE, use.patient.id = TRUE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{ptb}{
-%%     ~~Describe \code{ptb} here~~
+The PTB list object.
 }
   \item{name}{
-%%     ~~Describe \code{name} here~~
+The name of the ECG lead to extract.
+}
+\item{lead.a}{
+The name of the dominant ECG lead ('A') of the pair.
+}
+\item{lead.b}{
+The name of the subordinate ECG lead ('B') of the pair.
 }
   \item{recycle}{
-%%     ~~Describe \code{recycle} here~~
+If TRUE, shorter samples will be recycled to the length of the longest sample. If FALSE, longer samples will be truncated to the length of the shortest sample.
 }
   \item{use.patient.id}{
-%%     ~~Describe \code{use.patient.id} here~~
+If TRUE, each column name will be PAT_ID-TEST_ID. Otherwise, the name of each column is the test ID.
 }
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
+Returns a dataframe with a column for each test in the PTB list object. The column name is either test ID (as a string) or a concatenation of patient ID and test ID.
+
+The data returned by ptb.extract.lead.pair is Complex: the Real part is the dominant lead ('A'), and the Imaginary part is the subordinate lead ('B').
 }
 \author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+mkfs (http://www.github.com/mkfs)
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (ptb, name, recycle = TRUE, use.patient.id = TRUE) 
-{
-    lst <- lapply(ptb$leads, function(x) x[, name])
-    if (!recycle) {
-        min.len <- min(sapply(lst, length))
-        lst <- lapply(lst, function(x) x[0:min.len])
-    }
-    df <- as.data.frame(lst)
-    if (use.patient.id) {
-        names(df) <- ptb.generate.pat.test.names(ptb, as.integer(names(lst)))
-    }
-    else {
-        names(df) <- names(lst)
-    }
-    return(df)
-  }
+\dontrun{
+  ecg.extract.lead(ptb, 'ii')
+  ecg.extract.lead.pair(ptb, 'v1', 'i')
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
