@@ -5,7 +5,7 @@
 
 
 test.ptb.correlation <- function(ptb, a='v5', b='ii', block.size=1024, sample.rate=1000) {
-  data <- ptb.analysis(ptb, a, b, block.size, sample.rate)
+  data <- ptb.transform(ptb, a, b, block.size, sample.rate)
   data.cor <- list()
   for (n in names(data)) {
     df <- data[[n]]

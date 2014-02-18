@@ -23,6 +23,14 @@ ptb.from.string(str)
 A PTB list object with the following elements:
   \item{rec}{Data frame with per-test record information}
   \item{leads}{List with per-test data frames of ECG lead data}
+  
+The rec data frame has the following columns:
+  \item{ID}{ID of the test}
+  \item{Group}{Name of group to which the test belongs (e.g. 's0558_re.dat')}
+  \item{Patient}{ID of the patient}
+  \item{Age}{Age of the patient}
+  
+The leads list contains elements whose names are character representations of rec$ID. Each element is a data frame whose columns are ECG leads, and whose rows are sampled data points.
 }
 \references{
 Github Project page: http://www.github.com/mkfs/r-physionet-ptb
@@ -33,8 +41,9 @@ mkfs (http://www.github.com/mkfs)
 \note{
 The path to command line utilities for generating the JSON can be determined within R as follows:
 
-  system.file( 'exec', 'download_ptb.sh', package = 'r.physionet.ptb' )
-  system.file( 'exec', 'ptb_patient_to_json.rb', package = 'r.physionet.ptb' )
+  \code{system.file( 'exec', 'download_ptb.sh', package = 'r.physionet.ptb' )}
+  
+  \code{system.file( 'exec', 'ptb_patient_to_json.rb', package = 'r.physionet.ptb' )}
 }
 
 \seealso{
@@ -45,6 +54,7 @@ The path to command line utilities for generating the JSON can be determined wit
 \code{\link{ptb.test}}
 \code{\link{ptb.test.by.id}}
 \code{\link{ptb.transform}}
+\code{\link{ptb.patient.293}}
 }
 \examples{
 \dontrun{
