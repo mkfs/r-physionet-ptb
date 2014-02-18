@@ -4,7 +4,7 @@
 
 library(fftw)
 
-power.spectrum <- function(vec, block.size=512) {
+power.spectrum <- function(vec, data.out=list(), block.size=512) {
   num.blocks <- as.integer(floor(length(vec)/block.size))
   
   plan <- planFFT(block.size)
@@ -35,24 +35,30 @@ power.spectrum <- function(vec, block.size=512) {
   ps.ab <- (ps.ab[1:(length(ps.ab)/2)] * 2)
     
   # return averaged data
-  return( list(fft.a=fft.a, fft.b=fft.b, 
-               auto.power.spectrum.a=ps.a,
-               auto.power.spectrum.b=ps.b,
-               cross.power.spectrum=ps.ab
-  ) )
+  data.out$fft.a <- fft.a
+  data.out$fft.b <- fft.b
+  data.out$auto.power.spectrum.a <- ps.a
+  data.out$auto.power.spectrum.b <- ps.b
+  data.out$cross.power.spectrum <- ps.ab
+  return(data.out)
 }
 
 cross.correlation <- function(ptb, block.size=1024) {
   cross <- ptb$cross.power.spectrum
+  print(block.size)
+  print(summary(cross))
+  print(summary(-Conj(cross)))
   ptb$cross.correlation <- Re(FFT(-Conj(cross)) / -block.size)
   return(ptb)
 }
 
-ptb.frequency.domain <- function(vec, block.size=1024, sample.rate=1000) {
-  ptb <- power.spectrum(vec, block.size)
-  ptb <- cross.correlation(ptb, block.size)
+ptb.frequency.domain <- function(vec, data.out=list(), block.size=1024, 
+                                 sample.rate=1000) {
+  data.out <- power.spectrum(vec, data.out, block.size)
+  data.out <- cross.correlation(data.out, block.size)
   if ( exists('ptb.frequency.domain.post.process') ) {
-    ptb <- ptb.frequency.domain.post.process(ptb, block.size)
+    data.out <- ptb.frequency.domain.post.process(vec, data.out, 
+                                                  block.size, sample.rate)
   }
-  return(ptb)
+  return(data.out)
 }

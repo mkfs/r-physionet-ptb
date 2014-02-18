@@ -3,26 +3,23 @@
 \alias{ptb.ecg.by.id}
 \alias{ptb.test.by.id}
 \title{
-%%  ~~function to do ... ~~
+Extract Record and ECG data from PTB list object.
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Return a data frame containing the record or ECG data for a specific test in a PTB list object.
 }
 \usage{
 ptb.rec.by.id(ptb, id)
 ptb.ecg.by.id(ptb, id)
-ptb.test.by.id(ptb, ids)
+ptb.test.by.id(ptb, id)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{ptb}{
-%%     ~~Describe \code{ptb} here~~
+  PTB list object
 }
   \item{id}{
-%%     ~~Describe \code{id} here~~
+  ID to extract.
 }
-}
-\details{
 }
 \value{
 ptb.ecg.by.id will return the record (ptb$rec) dataframe for the specified test ID.
@@ -36,7 +33,7 @@ mkfs (http://www.github.com/mkfs)
 }
 \examples{
   data("patient.293")
-  rec.df <- ptb.rec.by.id(ptb, '160022')
-  ecg.df <- ptb.ecg.by.id(ptb, '160022')
-  ptb.subset <- ptb.test.by.id(ptb, c("1640024", "1640025"))
+  rec.df <- ptb.rec.by.id(ptb.patient.293, '2930557')
+  ecg.df <- ptb.ecg.by.id(ptb.patient.293, '2930557')
+  ptb.subset <- ptb.test.by.id(ptb.patient.293, '2930557')
 }

@@ -1,63 +1,30 @@
 \name{ptb.generate.pat.test.names}
 \alias{ptb.generate.pat.test.names}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+Generate a vector of column names for test IDs.
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+This generates a vector of names of the format '$PATIENT_ID-$TEST_ID' for tests in a PTB list object.
 }
 \usage{
 ptb.generate.pat.test.names(ptb, ids)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{ptb}{
-%%     ~~Describe \code{ptb} here~~
+  A PTB list object.
 }
   \item{ids}{
-%%     ~~Describe \code{ids} here~~
+  A vector of (numeric) Test IDs.
 }
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
+A character vector of suitable column names for the specified IDs.
 }
 \author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+mkfs (http://www.github.com/mkfs)
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (ptb, ids) 
-{
-    recs <- ptb.rec.by.id(ptb, ids)
-    apply(recs, 1, function(x) paste(x["Patient"], "-", x["ID"], 
-        sep = ""))
-  }
+  data("patient.293")
+  ptb.generate.pat.test.names(ptb.patient.293, c("2930557", "2930558"))
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

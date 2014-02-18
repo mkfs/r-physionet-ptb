@@ -52,7 +52,7 @@ runif.int.unique <- function(n, min, max) {
 # Extract 'num' random patients from PTB list. Returns a new PTB list. 
 ptb.patient <- function(ptb, num=100) {
   # select random patient IDs
-  pat.id <- unique(test.data$rec$Patient)
+  pat.id <- unique(ptb$rec$Patient)
   idx <- runif.int.unique(num, 1, length(pat.id))
   # extract records for patient IDs
   ids <- pat.id[idx]
@@ -62,17 +62,17 @@ ptb.patient <- function(ptb, num=100) {
 # Extract 'num' random tests from PTB list. Returns a new PTB list. 
 ptb.test <- function(ptb, num=100) {
   # select random test IDs
-  idx <- runif.int.unique(num, 1, length(test.data$rec$ID))
-  ids <- test.data$rec$ID[idx]
+  idx <- runif.int.unique(num, 1, length(ptb$rec$ID))
+  ids <- ptb$rec$ID[idx]
   ptb.test.by.id(ptb, ids)
 }
 
 # Extract specfic test(s) from PTB list. Returns a new PTB list.
-ptb.test.by.id <- function(ptb, ids) {
+ptb.test.by.id <- function(ptb, id) {
   # extract records for test IDs
-  df.rec <- ptb$rec[ptb$rec$ID %in% ids,]
+  df.rec <- ptb$rec[ptb$rec$ID %in% id,]
   # extract lead data for aelected tests
-  lst.leads <- ptb$leads[ names(ptb$leads) %in% as.character(ids) ]
+  lst.leads <- ptb$leads[ names(ptb$leads) %in% as.character(id) ]
   list( rec=df.rec, leads=lst.leads)
 }
 
@@ -157,9 +157,9 @@ ptb.extract.lead.pair <- function(ptb, lead.a, lead.b, recycle=TRUE, use.patient
   
   df <- as.data.frame(list.complex)
   if ( use.patient.id ) {
-    names(df) <- ptb.generate.pat.test.names(ptb, as.integer(names(lst)))
+    names(df) <- ptb.generate.pat.test.names(ptb, as.integer(names(list.a)))
   } else {
-    names(df) <- names(lst)
+    names(df) <- names(list.a)
   }
   return(df)
 }

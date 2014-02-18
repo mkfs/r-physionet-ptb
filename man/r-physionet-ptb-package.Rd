@@ -24,19 +24,27 @@ This package is used to perform basic transforms (e.g. frequency, wavelet) on th
 mkfs (http://www.github.com/mkfs/r-physionet-ptb)
 }
 \references{
-TODO: Physionet biblink
 Github Project page: http://www.github.com/mkfs/r-physionet-ptb
+PTB Page: http://www.physionet.org/physiobank/database/ptbdb/
+}
+\note{
+The path to command line utilities can be determined within R as follows:
+
+  system.file( 'exec', 'download_ptb.sh', package = 'r.physionet.ptb' )
+  system.file( 'exec', 'ptb_patient_to_json.rb', package = 'r.physionet.ptb' )
+The JSON files can get very large when used for many tests. It is recommended that the PTB files be converted a few at a time, loaded into R, and saved in a .Rdata object.
 }
 \keyword{ package }
 \examples{
-Command-line utilities:
+
 \dontrun{
+  # Command-line utilities:
   # Download the PTB database into ./ptbdb
   download_ptb.sh
   # Convert patients 100-199 to JSON
   ptb_patient_to_json.rb ptbdb/patient1?? > ptb.data.json
 }
-The JSON files can get very large when used for many tests. It is recommended that the PTB files be converted a few at a time, loaded into R, and saved in a .Rdata object.
+
 \dontrun{
   library(r-physionet-ptb)
   ptb <- ptb.from.file('/tmp//ptb.data.json')
@@ -46,10 +54,14 @@ The JSON files can get very large when used for many tests. It is recommended th
   save(list=c('ptb', 'ptb.data'), file='ptb.RData')
 }
 
+  data('patient.293')
+  ptb.data.293 <- ptb.transform(ptb.patient.293)
+
 \dontrun{
   # Extract the lead pair V1 and V6 into a Complex dataframe column
   df.ecg <- ptb.extract.lead.pair(ptb, 'v1', 'v6')
   # Plot a frequency transform of the lead pair
   vec.cps <- ptb.power.spectrum(df.ecg[,1])$cross.power.spectrum
   plot(Re(vec.cps), type='l')
+}
 }

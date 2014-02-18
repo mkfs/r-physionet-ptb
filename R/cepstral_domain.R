@@ -20,7 +20,8 @@ complex.cepstrum <- function(vec, block.size=1024, sample.rate=1000) {
   return( list(a=mfcc.a, b=mfcc.b) )
 }
 
-ptb.cepstral.domain <- function(vec, data.out, block.size=1024, sample.rate=1000) {
+ptb.cepstral.domain <- function(vec, data.out=list(), block.size=1024, 
+                                sample.rate=1000) {
   cep.lst <- complex.cepstrum(vec, block.size, sample.rate)
   data.out$mfcc.a.cepstra <- cep.lst$a$cepstra
   data.out$mfcc.a.audio.spectrum <- cep.lst$a$aspectrum

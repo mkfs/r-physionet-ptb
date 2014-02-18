@@ -288,6 +288,7 @@ validate.feature.vector.function <- function(ptb, func.name, plot=TRUE) {
 # -----------------------------------------------------
 # PLOT
 library(ggplot2)
+
 ptb.op.palette.colorblind <- c(
   'auto.power.spectrum.a' = "#000000", 'auto.power.spectrum.b' = "#000000", 
   'fft.a' = "#E69F00", 'fft.b' = "#E69F00", 'fft.ab' = "#E69F00",

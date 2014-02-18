@@ -14,6 +14,7 @@ ptb.from.string(str)
 \arguments{
   \item{path}{
   Path to a JSON file created by ptb_patient_to_json.rb
+  }
   \item{str}{
   Character vector containing JSON created by ptb_patient_to_json.rb
 }
@@ -29,6 +30,12 @@ Github Project page: http://www.github.com/mkfs/r-physionet-ptb
 \author{
 mkfs (http://www.github.com/mkfs)
 }
+\note{
+The path to command line utilities for generating the JSON can be determined within R as follows:
+
+  system.file( 'exec', 'download_ptb.sh', package = 'r.physionet.ptb' )
+  system.file( 'exec', 'ptb_patient_to_json.rb', package = 'r.physionet.ptb' )
+}
 
 \seealso{
 \code{\link{ptb.list.leads}}
@@ -41,6 +48,11 @@ mkfs (http://www.github.com/mkfs)
 }
 \examples{
 \dontrun{
-  ptb <- ptb.from.file('/tmp/ptb.json')
+  # from shell:
+  download_ptb.sh
+  ptb_patient_to_json.rb ptbdb/patient1?? > /tmp/ptb.data.json
+  
+  # in R:
+  ptb <- ptb.from.file('/tmp/ptb.data.json')
 }
 }

@@ -13,7 +13,8 @@ complex.dwt <- function(vec, block.size=1024, filter='haar') {
   return( list(dwt.a=aa, dwt.b=bb) ) #, cross=ab)) )
 }
 
-ptb.wavelet.domain <- function(vec, data.out, block.size=1024, sample.rate=1000) {
+ptb.wavelet.domain <- function(vec, data.out=list(), block.size=1024, 
+                               sample.rate=1000) {
   dwt.lst <- complex.dwt(vec, block.size)
   data.out$dwt.a.wave <- dwt.lst$dwt.a@W
   data.out$dwt.a.scale <- dwt.lst$dwt.a@V

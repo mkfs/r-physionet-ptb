@@ -41,8 +41,7 @@ mkfs (http://www.github.com/mkfs)
 }
 
 \examples{
-\dontrun{
-  ecg.extract.lead(ptb, 'ii')
-  ecg.extract.lead.pair(ptb, 'v1', 'i')
-}
+  data("patient.293")
+  df.ecg <- ptb.extract.lead(ptb.patient.293, 'ii')
+  df.ecg <- ptb.extract.lead.pair(ptb.patient.293, 'v1', 'v6')
 }

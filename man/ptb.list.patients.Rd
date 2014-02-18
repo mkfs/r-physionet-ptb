@@ -2,59 +2,33 @@
 \alias{ptb.list.patients}
 \alias{ptb.list.leads}
 \alias{ptb.list.tests}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+List the contents of a PTB list object.
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+These are convience functions for quickly listing the patient IDs, test IDs, and lead names in a PTB list object.
 }
 \usage{
 ptb.list.patients(ptb)
+ptb.list.leads(ptb)
+ptb.list.tests(ptb)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{ptb}{
-%%     ~~Describe \code{ptb} here~~
+  A PTB list object
 }
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
+A numeric vector is returned by ptb.list.patients and ptb.list.tests.
+
+A character vector is returned by ptb.list.leads.
 }
 \author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+mkfs (http://www.github.com/mkfs)
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (ptb) 
-{
-    ptb$rec$Patient
-  }
+  data("patient.293")
+  ptb.list.patients(ptb.patient.293)
+  ptb.list.leads(ptb.patient.293)
+  ptb.list.tests(ptb.patient.293)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

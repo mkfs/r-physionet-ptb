@@ -29,4 +29,8 @@ mkfs (http://www.github.com/mkfs)
 }
 \examples{
   ptb.downsample( runif(5000, min=0, max=1500), 100 )
+  
+  data("patient.293")
+  df.ecg <- ptb.extract.lead(ptb.patient.293, 'ii')
+  df.ecg <- apply( df.ecg, 2, ptb.downsample, 100 )
 }
