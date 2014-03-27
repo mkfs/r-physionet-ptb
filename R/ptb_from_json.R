@@ -13,6 +13,7 @@ ptb.from.file <- function(path) {
   ptb.lst <- fromJSON(file=path)
   ptb <- list.to.ptb(ptb.lst)
   rm(ptb.lst)
+  gc()
   return(ptb)
 }
 
@@ -20,6 +21,7 @@ ptb.from.string <- function(str) {
   ptb.lst <- fromJSON(str)
   ptb <- list.to.ptb(ptb.lst)
   rm(ptb.lst)
+  gc()
   return(ptb)
 }
 

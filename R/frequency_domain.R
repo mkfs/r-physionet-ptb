@@ -45,9 +45,9 @@ power.spectrum <- function(vec, data.out=list(), block.size=512) {
 
 cross.correlation <- function(ptb, block.size=1024) {
   cross <- ptb$cross.power.spectrum
-  print(block.size)
-  print(summary(cross))
-  print(summary(-Conj(cross)))
+  #print(block.size)
+  #print(summary(cross))
+  #print(summary(-Conj(cross)))
   ptb$cross.correlation <- Re(FFT(-Conj(cross)) / -block.size)
   return(ptb)
 }
