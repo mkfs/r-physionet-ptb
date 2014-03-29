@@ -40,6 +40,11 @@ ptb.transform <- function(ptb, lead.a='v6', lead.b='iii', block.size=1024,
   return(data.out)
 }
 
+ptb.lead.pair.combinations <- function(dom.leads, sub.leads) {
+  as.vector(sapply(dom.leads, 
+                   function (x) sapply(sub.leads, function (y) c(x, y))))
+}
+
 # pairs: c(c('v5', 'ii'), c('v6', 'iii'))
 # or two-column matrix: matrix(c('v5', 'ii', 'v6', 'iii'), ncol=2, byrow=TRU
 ptb.transform.pairs <- function(ptb, pairs, block.size=1024, 
